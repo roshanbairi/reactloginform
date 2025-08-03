@@ -24,27 +24,5 @@ A simple, beginner-friendly project demonstrating **Login** and **Register** for
 - JavaScript (ES6+)
 - HTML5 & JSX
 
----
 
- Folder Structure
-
-my-login-project/
-│
-├── public/
-│ └── index.html
-├── src/
-│ ├── components/
-│ │ ├── Login.jsx
-│ │ └── Register.jsx
-│ ├── styles/
-│ │ ├── login.css
-│ │ └── register.css
-│ ├── App.jsx
-│ ├── main.jsx
-├── .gitignore
-├── tailwind.config.js
-├── postcss.config.js
-├── package.json
-├── README.md
-└── vite.config.js
 
