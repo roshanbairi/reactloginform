@@ -7,10 +7,36 @@ const LoginCard = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Email:', email);
-    console.log('Password:', password);
+
+    const loginData = {
+      email,
+      password,
+    };
+
+    try {
+      const response = await fetch("http://localhost:5000/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(loginData),
+      });
+
+      const result = await response.json();
+      console.log("Login Response:", result);
+
+      // Optional: Navigate to dashboard if login is successful
+      if (result.success) {
+        navigate("/dashboard");
+      } else {
+        alert(result.message || "Login failed");
+      }
+    } catch (error) {
+      console.error("Error logging in:", error);
+      alert("Something went wrong. Try again.");
+    }
   };
 
   const handleReset = () => {
@@ -25,20 +51,13 @@ const LoginCard = () => {
     <div className="login-container">
       <div className="login-card">
         <div className="login-left">
-          <video
-            src="https://www.w3schools.com/html/mov_bbb.mp4"
-            autoPlay
-            loop
-            muted
-            className="bird-video"
-          />
           <h2 className="left-title">Enter Your Dashboard</h2>
         </div>
 
         <div className="login-right">
           <h1 className="brand-name">Login Panel</h1>
 
-          <form className="login-form" onSubmit={handleLogin}>
+          <form className="login-form" onSubmit={handleSubmit}>
             <label className="form-label">User name or Email</label>
             <input
               type="text"
@@ -46,6 +65,7 @@ const LoginCard = () => {
               className="form-input"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
 
             <label className="form-label">Password</label>
@@ -55,6 +75,7 @@ const LoginCard = () => {
               className="form-input"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
 
             <div className="forgot-link">
@@ -66,7 +87,9 @@ const LoginCard = () => {
               </span>
             </div>
 
-            <button className="signin-btn">Sign in</button>
+            <button className="signin-btn" type="submit">
+              Sign in
+            </button>
           </form>
 
           <div className="divider">

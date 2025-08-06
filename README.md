@@ -23,6 +23,4 @@ A simple, beginner-friendly project demonstrating **Login** and **Register** for
 - Tailwind CSS
 - JavaScript (ES6+)
 - HTML5 & JSX
-
-
-
+  
